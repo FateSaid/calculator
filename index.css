@@ -1,0 +1,15 @@
+.container{
+    display:flex;
+    justify-content: center;
+    border: 2px solid black;
+    height:500px;
+    width: 300px;
+    margin:auto;
+}
+
+.display{
+    width: 80%;
+    height: 20%;
+    border: 2px solid red;
+    margin-top: 10px;
+}
