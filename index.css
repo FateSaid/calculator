@@ -7,20 +7,23 @@
     width: 300px;
     margin:auto;
     gap: 20px;
+    background-color:darkgray;
 }
 
 .display{
     width: 80%;
-    height: 20%;
-    border: 2px solid red;
+    height: 10%;
+    
     align-self: center;
+    margin-bottom: 40px;
+    background-color: white;
 }
 
 .keys{
     display:flex;
     width: 80%;
     height: 60%;
-    border: 2px solid blue;
+    
     align-self: center;
     flex-wrap:wrap;
 }
@@ -28,11 +31,11 @@
     display:flex;
     justify-content:center;
     align-items: center;
-    border:2px solid green;
-    width:60px;
+    
+    width:50px;
     height: auto;
     flex:1 1 auto;
     text-align: center;
     margin:1px;
-    background-color: gray;
+    background-color: lightgray;
 }
