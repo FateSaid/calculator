@@ -13,12 +13,22 @@
 .display{
     width: 80%;
     height: 15%;
-    text-align: right;
     margin:auto;
     display:flex;
     background-color: white;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.formula, .result{
+    display:flex;
+    
+    height:auto;
+    border:2px solid black;
+    flex:auto;
+    text-align: right;
+
 }
 
 .keys{
