@@ -1,22 +1,23 @@
 function add(a,b){
-    return total = Number(a)+ Number(b);
+    return Number(a)+ Number(b);
 }
 
 function sub(a, b){
-    return total = Number(a) - Number(b);
+    return Number(a) - Number(b);
 }
 
-function multiply(n){
-    return total*=n;
+function multiply(a, b){
+    return Number(a) * Number(b);
 }
 
-function divide(n){
-    return total/=n;
+function divide(a,b){
+    return Number(a)/Number(b);
 }
 
 function operate(){
-    return operation(secondNumber, firstNumber);
+    return operation(total, inputNumber);
 }
+
 
 
 
@@ -29,15 +30,15 @@ const display = document.querySelector('.display');
 let operation;
 let equation = [];
 let total = 0;
-let firstNumber = [];
+let inputNumber = [];
 let secondNumber = [];
 let operative;
 
 const nine = document.querySelector('#nine');
 nine.addEventListener('click', function(){
         
-        firstNumber.push('9');
-        result.textContent = `${firstNumber.join('')}`;
+        inputNumber+= 9;
+        result.textContent = inputNumber;
 
     
     
@@ -45,105 +46,139 @@ nine.addEventListener('click', function(){
 
 const eight = document.querySelector('#eight');
 eight.addEventListener('click', function(){
-    firstNumber.push('8');
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber+= 8;
+    result.textContent = `${inputNumber}`;
 });
 
 const seven = document.querySelector('#seven');
 seven.addEventListener('click', function(){
-    firstNumber.push('7');
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber += 7;
+    result.textContent = `${inputNumber}`;
 });
 
 const six = document.querySelector('#six');
 six.addEventListener('click', function(){
-    firstNumber.push('6');
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber += 6;
+    result.textContent = `${inputNumber}`;
 });
 
 const five = document.querySelector('#five');
 five.addEventListener('click', function(){
-    firstNumber.push('5');
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber+= 5;
+    result.textContent = `${inputNumber}`;
 });
 
 const four = document.querySelector('#four');
 four.addEventListener('click', function(){
-    firstNumber.push('4');
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber += 4;
+    result.textContent = `${inputNumber}`;
 });
 
 const three = document.querySelector('#three');
 three.addEventListener('click', function(){
-    firstNumber.push('3');
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber+= 3;
+    result.textContent = `${inputNumber}`;
 });
 
 const two = document.querySelector('#two');
 two.addEventListener('click', function(){
-    firstNumber.push('2');
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber += 2;
+    result.textContent = `${inputNumber}`;
 });
 
 const one = document.querySelector('#one');
 one.addEventListener('click', function(){
-    firstNumber.push(1);
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber+= 1;
+    result.textContent = `${inputNumber}`;
+    operate();
 });
 
 const zero = document.querySelector('#zero');
 zero.addEventListener('click', function(){
-    firstNumber.push('0');
-    result.textContent = `${firstNumber.join('')}`;
+    inputNumber+= 0;
+    result.textContent = `${inputNumber}`;
 })
 
 const division = document.querySelector('#division');
 division.addEventListener('click', function(){
+    total -= Number(inputNumber);
+    inputNumber = [];
     result.textContent = division.textContent;
     operation = divide;
+    operative = '/';
 });
 
 const addition = document.querySelector('#plus');
 addition.addEventListener('click', function(){
-    secondNumber = firstNumber;
-    firstNumber = [];
+    if(total > 0){
+        operate();
+    }
+    total += Number(inputNumber);
+    
+    inputNumber = [];
     result.textContent = addition.textContent;
     operation = add;
     operative = '+';
+    let hope = formula.textContent;
+    formula.textContent = operate(hope, total);
+    
+    
+    
+    
+    
    
 });
 
 const subtraction = document.querySelector('#subtraction');
 subtraction.addEventListener('click', function(){
-    secondNumber = firstNumber;
-    firstNumber = [];
+    if(total > 0){
+        operate();
+    }
+    if(total > inputNumber){
+        total = total - inputNumber;
+    } else if(total < inputNumber){
+        total = inputNumber - total;
+    }
+    
+    inputNumber = [];
     result.textContent = subtraction.textContent;
     operation = sub;
     operative = '-';
+    let hope = formula.textContent;
+    formula.textContent = operate(hope, total);
+    
+    
 });
 
 const multiplication = document.querySelector('#x');
 multiplication.addEventListener('click', function(){
+    total*= inputNumber;
+    inputNumber = [];
     result.textContent = multiplication.textContent;
     operation = multiply;
+    operative = 'x';
+    formula.textContent = multiply(total, inputNumber);
+    
 });
 
 
 
 const equal = document.querySelector('#equal');
 equal.addEventListener('click', function(){
-    operate(firstNumber, secondNumber);
-    result.textContent = total;
-    formula.textContent = `${secondNumber} ${operative} ${firstNumber}`;
+    formula.textContent = operate();
+    result.textContent = '';
+
+    
 
 
 })
 
 
-const clear = document.querySelector('.clear');
+const clear = document.querySelector('#clear');
 clear.addEventListener('click', function(){
-    firstNumber = [];
-    seconNumber = [];
+    inputNumber = [];
+    total = [];  
+    formula.textContent = '';
     result.textContent = 0;
 });
 

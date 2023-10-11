@@ -3,7 +3,7 @@
     justify-content: center;
     flex-direction: column;
     border: 2px solid black;
-    height:500px;
+    height:550px;
     width: 300px;
     margin:auto;
     gap: 20px;
@@ -25,7 +25,7 @@
     display:flex;
     
     height:auto;
-    border:2px solid black;
+    
     flex:1;
     text-align: right;
 
@@ -35,9 +35,10 @@
     display:flex;
     width: 80%;
     height: 60%;
-    
+    margin-bottom:20px;
     align-self: center;
     flex-wrap:wrap;
+    cursor:default;
 }
 .key{
     display:flex;
@@ -57,19 +58,7 @@
     background-color: aqua;
 }
 
-.clear{
-    height: 10%;
-    width: 80%;
-    border: 2px solid #000000;
-    align-self:center;
-    background-color: rgba(198, 139, 139, 0.4);
-    text-align: center;
-    margin:auto;
-    display:flex;
-    justify-content:center;
-    align-items: center;
-}
-
-.clear:hover{
-    background-color: red;
+#clear{
+    width:80%;
+    height:auto;
 }
