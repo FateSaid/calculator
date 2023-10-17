@@ -1,188 +1,171 @@
-function add(a,b){
-    return Number(a)+ Number(b);
+const allBtns = document.querySelectorAll('.button');
+const display = document.querySelector('.display');
+const result = document.querySelector('.result');
+const equation = document.querySelector('.equation');
+
+window.addEventListener('keydown', function(e){
+    equation.textContent += e.key.replace(/\D/g, '');
+});
+
+
+let array = [];
+let operation;
+
+
+allBtns.forEach(button => {
+    button.addEventListener('click', function(e){
+        
+        let value = e.target.dataset.key;
+        
+        if(value == '.'){
+            if(equation.textContent.includes('.')){
+                return;
+            }
+        }
+        
+        equation.textContent += value.replace(/[d+=*/-]/g, '');
+        if(value == 'd'){
+            let screen = equation.textContent;
+            equation.textContent = screen.slice(0, -1);
+        }
+
+        
+        
+        
+        if(value == '+'){
+            if(equation.textContent !== ''){
+                push(equation.textContent); 
+            }
+            array.push('+');
+            clear();
+
+            if(array.length > 3){
+                answerOnScreen();
+                clearArray();
+                push(result.textContent);
+                array.push('+');
+            }
+        }
+
+        if(value == '-'){
+            if(equation.textContent !== ''){
+                push(equation.textContent); 
+            }
+            array.push('-');
+            clear();
+
+            if(array.length > 3){
+                answerOnScreen();
+                clearArray();
+                push(result.textContent);
+                array.push('-');
+            }
+            
+        }
+
+        if(value == '*'){
+            if(equation.textContent !== ''){
+                push(equation.textContent); 
+            }
+            array.push('*');
+            clear();
+
+            if(array.length > 3){
+                answerOnScreen();
+                clearArray();
+                push(result.textContent);
+                array.push('*');
+            }
+            
+        }
+
+        if(value == '/'){
+            if(equation.textContent !== ''){
+                push(equation.textContent); 
+            }
+            array.push('/');
+            clear();
+
+            if(array.length > 3){
+                answerOnScreen();
+                clearArray();
+                push(result.textContent);
+                array.push('/');
+            }
+            
+        }
+
+        if(value == '='){
+            if (equation.textContent == '' && result.textContent == ''){
+                return;
+            }
+            push(equation.textContent);
+            equation.textContent = '';
+            answerOnScreen();
+            if(result.textContent > 0){
+                clearArray();
+                push(result.textContent);
+            }
+        }
+
+        if(value == 'AC'){
+            clear();
+            array = [];
+        }
+        
+        if(result.textContent == 'Infinity'){
+            return result.textContent = "Can't do that";
+        }
+        
+    });
+});
+
+function push(e){
+    return array.push(Number(e));
+}
+
+function add(a, b){
+    return Number(a)+Number(b);
 }
 
 function sub(a, b){
-    return Number(a) - Number(b);
+    return a-b;
 }
 
-function multiply(a, b){
-    return Number(a) * Number(b);
+function multi(a,b){
+    return a*b;
+}
+
+function operate(operator, a, b){
+    if(operator == '+'){
+        return add(a, b);
+    }
+    if(operator == '-'){
+        return sub(a, b);
+    }
+    if(operator == '*'){
+        return multi(a,b);
+    }
+    if(operator == '/'){
+        return divide(a,b);
+    }
+
 }
 
 function divide(a,b){
-    return Number(a)/Number(b);
+    return a/b;
 }
 
-function operate(){
-    return operation(total, inputNumber);
-}
-
-
-
-
-
-
-const display = document.querySelector('.display');
-
-
-
-let operation;
-let equation = [];
-let total = 0;
-let inputNumber = [];
-let secondNumber = [];
-let operative;
-
-const nine = document.querySelector('#nine');
-nine.addEventListener('click', function(){
-        
-        inputNumber+= 9;
-        result.textContent = inputNumber;
-
-    
-    
-})
-
-const eight = document.querySelector('#eight');
-eight.addEventListener('click', function(){
-    inputNumber+= 8;
-    result.textContent = `${inputNumber}`;
-});
-
-const seven = document.querySelector('#seven');
-seven.addEventListener('click', function(){
-    inputNumber += 7;
-    result.textContent = `${inputNumber}`;
-});
-
-const six = document.querySelector('#six');
-six.addEventListener('click', function(){
-    inputNumber += 6;
-    result.textContent = `${inputNumber}`;
-});
-
-const five = document.querySelector('#five');
-five.addEventListener('click', function(){
-    inputNumber+= 5;
-    result.textContent = `${inputNumber}`;
-});
-
-const four = document.querySelector('#four');
-four.addEventListener('click', function(){
-    inputNumber += 4;
-    result.textContent = `${inputNumber}`;
-});
-
-const three = document.querySelector('#three');
-three.addEventListener('click', function(){
-    inputNumber+= 3;
-    result.textContent = `${inputNumber}`;
-});
-
-const two = document.querySelector('#two');
-two.addEventListener('click', function(){
-    inputNumber += 2;
-    result.textContent = `${inputNumber}`;
-});
-
-const one = document.querySelector('#one');
-one.addEventListener('click', function(){
-    inputNumber+= 1;
-    result.textContent = `${inputNumber}`;
-    operate();
-});
-
-const zero = document.querySelector('#zero');
-zero.addEventListener('click', function(){
-    inputNumber+= 0;
-    result.textContent = `${inputNumber}`;
-})
-
-const division = document.querySelector('#division');
-division.addEventListener('click', function(){
-    total -= Number(inputNumber);
-    inputNumber = [];
-    result.textContent = division.textContent;
-    operation = divide;
-    operative = '/';
-});
-
-const addition = document.querySelector('#plus');
-addition.addEventListener('click', function(){
-    if(total > 0){
-        operate();
-    }
-    total += Number(inputNumber);
-    
-    inputNumber = [];
-    result.textContent = addition.textContent;
-    operation = add;
-    operative = '+';
-    let hope = formula.textContent;
-    formula.textContent = operate(hope, total);
-    
-    
-    
-    
-    
-   
-});
-
-const subtraction = document.querySelector('#subtraction');
-subtraction.addEventListener('click', function(){
-    if(total > 0){
-        operate();
-    }
-    if(total > inputNumber){
-        total = total - inputNumber;
-    } else if(total < inputNumber){
-        total = inputNumber - total;
-    }
-    
-    inputNumber = [];
-    result.textContent = subtraction.textContent;
-    operation = sub;
-    operative = '-';
-    let hope = formula.textContent;
-    formula.textContent = operate(hope, total);
-    
-    
-});
-
-const multiplication = document.querySelector('#x');
-multiplication.addEventListener('click', function(){
-    total*= inputNumber;
-    inputNumber = [];
-    result.textContent = multiplication.textContent;
-    operation = multiply;
-    operative = 'x';
-    formula.textContent = multiply(total, inputNumber);
-    
-});
-
-
-
-const equal = document.querySelector('#equal');
-equal.addEventListener('click', function(){
-    formula.textContent = operate();
+function clear(){
+    equation.textContent = '';
     result.textContent = '';
-
     
+}
 
+function clearArray(){
+    array = [];
+}
 
-})
-
-
-const clear = document.querySelector('#clear');
-clear.addEventListener('click', function(){
-    inputNumber = [];
-    total = [];  
-    formula.textContent = '';
-    result.textContent = 0;
-});
-
-const result = display.querySelector('.result');
-
-
-const formula = document.querySelector('.formula');
+function answerOnScreen(){
+    return result.textContent = operate(array[1], array[0], array[2]);
+}
